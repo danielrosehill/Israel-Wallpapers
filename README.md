@@ -44,4 +44,9 @@ The collection includes images from various locations and themes:
 - Transport
 - And more...
 
+## Special Collections
+
+- **`ai-gen/`**: Contains AI-generated images
+- **`flag/`**: A flat archive containing all images (including AI-generated ones) condensed into one directory
+
  
