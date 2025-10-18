@@ -33,6 +33,4 @@ The collection includes images from various locations and themes:
 - Transport
 - And more...
 
-## License
-
-All images © Daniel Rosehill. Available on Pexels under the Pexels License.
+ 
