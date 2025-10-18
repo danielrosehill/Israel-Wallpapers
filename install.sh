@@ -27,6 +27,46 @@ if [ ! -d "$IMAGES_DIR" ]; then
     exit 1
 fi
 
+# Check if Git LFS is installed
+if ! command -v git-lfs &> /dev/null; then
+    echo -e "${YELLOW}Warning: Git LFS is not installed.${NC}"
+    echo "This repository uses Git LFS to store image files."
+    echo ""
+    echo "Please install Git LFS first:"
+    echo "  Ubuntu/Debian: sudo apt-get install git-lfs"
+    echo "  Other systems: https://git-lfs.github.com/"
+    echo ""
+    read -p "Do you want to continue anyway? [y/N]: " continue_anyway
+    continue_anyway=${continue_anyway:-N}
+    if [[ ! "$continue_anyway" =~ ^[Yy]$ ]]; then
+        exit 1
+    fi
+fi
+
+# Check if we need to pull LFS files
+# Look for LFS pointer files (they're very small, < 200 bytes)
+sample_image=$(find "$IMAGES_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print -quit)
+if [ -n "$sample_image" ]; then
+    file_size=$(stat -f%z "$sample_image" 2>/dev/null || stat -c%s "$sample_image" 2>/dev/null)
+    if [ "$file_size" -lt 200 ]; then
+        echo -e "${BLUE}Detecting LFS pointer files. Pulling actual images from Git LFS...${NC}"
+        echo ""
+        if git lfs pull; then
+            echo -e "${GREEN}✓ Successfully pulled image files from Git LFS${NC}"
+            echo ""
+        else
+            echo -e "${YELLOW}Warning: Failed to pull files from Git LFS.${NC}"
+            echo "The installation may not work correctly."
+            echo ""
+            read -p "Do you want to continue anyway? [y/N]: " continue_anyway
+            continue_anyway=${continue_anyway:-N}
+            if [[ ! "$continue_anyway" =~ ^[Yy]$ ]]; then
+                exit 1
+            fi
+        fi
+    fi
+fi
+
 # Function to get image dimensions
 get_image_dimensions() {
     local img="$1"

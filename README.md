@@ -10,11 +10,22 @@ These images are also available on Pexels: https://www.pexels.com/@danielrosehil
 
 ## Installation
 
-Run the interactive installation script to install the wallpapers to your system:
+First, ensure Git LFS is installed:
+
+```bash
+# On Ubuntu/Debian:
+sudo apt-get install git-lfs
+
+# On other systems, see: https://git-lfs.github.com/
+```
+
+Then run the interactive installation script to install the wallpapers to your system:
 
 ```bash
 ./install.sh
 ```
+
+The script will automatically pull the image files from Git LFS if needed.
 
 The installation script allows you to:
 - Choose the installation directory (default: `~/wallpapers`)
