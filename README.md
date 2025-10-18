@@ -1,5 +1,11 @@
 # Israel Wallpapers
 
+![16:9](https://img.shields.io/badge/16:9-landscape-blue)
+![9:16](https://img.shields.io/badge/9:16-portrait-green)
+![JPG](https://img.shields.io/badge/format-JPG-orange)
+
+![alt text](banner/collage.png)
+
 A collection of wallpaper images showcasing various scenes from Israel.
 
 ## About
